@@ -8,11 +8,11 @@ class NewVisitorTest(unittest.TestCase):
     #
     #1. setUp和tearDown是特殊的方法，分别在各个测试方法之前和之后运行。我使用这两个方法打开和关闭浏览器。
     #   这两个方法和try/except类似，就算测试中出错了，也会运行tearDown方法。测试结束后，Firefox窗口不会一直停留在桌面上
-	#2. implicitly_wait是隐式等待，在selenium操作之前等待页面完成加载，在简单的应用中可以使用，但是当应用超过某种复杂度之后，则需要显式等待规则
+    #2. implicitly_wait是隐式等待，在selenium操作之前等待页面完成加载，在简单的应用中可以使用，但是当应用超过某种复杂度之后，则需要显式等待规则
     #
     def setUp(self):
         self.browser = webdriver.Firefox()
-		self.browser.implicitly_wait(3)
+        self.browser.implicitly_wait(3)
 
     def tearDown(self):
         self.browser.quit()
@@ -26,7 +26,7 @@ class NewVisitorTest(unittest.TestCase):
     def test_can_start_a_list_and_retrieve_it_later(self):
         self.browser.get('http://localhost:8000')
         
-        self.assertIn('To-Do',self.browser.titile)
+        self.assertIn('To-Do',self.browser.title)
 
         self.fail('Finish the test!')
 
@@ -35,11 +35,8 @@ class NewVisitorTest(unittest.TestCase):
 #调用unittest.main()启动unittest的测试运行程序，这个程序会在文件中自动查找测试类和方法，然后运行。
 #warnings='ignore'的作用是禁止抛出ResourceWearing异常。
 #
-if _name_ == '_main_':
-     unittest.main(warnings='ignore')  
-
-
-
+if __name__ == '__main__':
+     unittest.main(warnings='ignore')
 
 
 #browser = webdriver.Firefox()
