@@ -4,6 +4,7 @@ from django.test import TestCase
 from lists.views import home_page
 from django.http import HttpRequest
 from django.http import HttpResponse
+from django.template.loader import render_to_string
 
 
 # Create your tests here.
@@ -28,6 +29,11 @@ class HomePageTest(TestCase):
   def test_home_page_returns_correct_html(self):
       request = HttpRequest()
       response = home_page(request)
+      """
       self.assertTrue(response.content.startswith(b'<html>'))
       self.assertIn(b'<title>To-Do lists</title>', response.content)
-      self.assertTrue(response.content.endswith(b'</html>'))
+      self.assertTrue(response.content.strip().endswith(b'</html>'))
+      """
+      #使用decode()把response.content中的字节转换为Python中的Unicode字符串，这样就可以对比字符串，而不用像上面的代码那样比对字节
+      expected_html=render_to_string('home.html')
+      self.assertEqual(response.content.decode(),expected_html)
